@@ -8,7 +8,9 @@ class FileWatcher
   def call
     Dir['incoming/*.log'].each do |file|
       if @file_processor.call(File.read(file))
-        FileUtils.mv(file, "completed")
+        FileUtils.mv(file, 'completed')
+      else
+        FileUtils.mv(file, 'errors')
       end
     end
   end
